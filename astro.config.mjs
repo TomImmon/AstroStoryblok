@@ -4,8 +4,9 @@ import { loadEnv } from 'vite';
 import tailwind from '@astrojs/tailwind';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import vercel from "@astrojs/vercel/serverless";
+import preact from '@astrojs/preact';
 const env = loadEnv('', process.cwd(), 'STORYBLOK');
- 
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [storyblok({
@@ -22,7 +23,7 @@ export default defineConfig({
       'all-articles': 'storyblok/AllArticles',
       article: 'storyblok/Article'
     }
-  }), tailwind()],
+  }), tailwind(), preact()],
   output: env.STORYBLOK_IS_PREVIEW === 'yes' ? 'server' : 'static',
   ...(env.STORYBLOK_ENV === 'development' && {
     vite: {

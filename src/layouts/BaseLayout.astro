@@ -1,6 +1,10 @@
 ---
 import Header from '../components/Header.astro'
+import Greeting from '../components/Greeting';
+import '../styles/global.css'
+
 const { language, langSwitch } = Astro.props
+
 ---
  
 <html lang={language}>
@@ -12,6 +16,10 @@ const { language, langSwitch } = Astro.props
   </head>
   <body class="mx-auto">
     <Header langSwitch={langSwitch} language={language} />
+    <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
     <slot />
+    <script>
+      import "../scripts/menu.js";
+    </script>
   </body>
 </html>

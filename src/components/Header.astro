@@ -1,4 +1,5 @@
 ---
+import Hamburger from './/Hamburger.astro'
 import { useStoryblokApi } from '@storyblok/astro'
 import { languages, getTransLink } from '../utils/langs.js'
 const { language, langSwitch } = Astro.props
@@ -7,7 +8,9 @@ const { data } = await storyblokApi.get('cdn/stories/config', {
   version: 'draft',
   resolve_links: 'url',
 })
-const headerMenu = data?.story?.content?.header_menu
+var headerMenu = data?.story?.content?.header_menu
+const objIndex = headerMenu.findIndex(menu => menu.link.cached_url == "home")
+headerMenu[objIndex].link.cached_url=""
 
 ---
  
@@ -39,5 +42,6 @@ const headerMenu = data?.story?.content?.header_menu
         ))
       }
     </nav>
+    <Hamburger/>
   </div>
 </header>
